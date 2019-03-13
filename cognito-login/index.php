@@ -70,12 +70,14 @@ if (!empty($accessToken) || !empty($refreshToken)) {
         $error = $e->getMessage();
     }
 
-    $username = $result->get('Username');
-    // メールアドレスを持ってくる
-    $filtered = array_values(array_filter($result->get('UserAttributes'), function ($value) {
-        return $value['Name'] === 'email';
-    }));
-    $email = $filtered[0]['Value'] ?? '';
+    if (empty($error)) {
+        $username = $result->get('Username');
+        // メールアドレスを持ってくる
+        $filtered = array_values(array_filter($result->get('UserAttributes'), function ($value) {
+            return $value['Name'] === 'email';
+        }));
+        $email = $filtered[0]['Value'] ?? '';
+    }
 }
 
 echo <<<EOT
@@ -95,6 +97,7 @@ echo <<<EOT
         <ul>
             <li><a href="/user-invite">User Invite</a></li>
             <li><a href="/login">Login</a></li>
+            <li><a href="/sign-out">Logout</a></li>
         </ul>
     </body>
 </html>
