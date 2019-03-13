@@ -20,3 +20,7 @@ Default output format [json]:
 $ php -S localhost:8080
 $ open http://localhost:8080
 ```
+
+## Links
+- [AWS SDK](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.CognitoIdentityProvider.CognitoIdentityProviderClient.html)
+- [CloudFormation](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html)
