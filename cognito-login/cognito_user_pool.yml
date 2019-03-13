@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Cognito User Pool
+
+Resources:
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: User Pool Example
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: false
+        UnusedAccountValidityDays: 30
+        InviteMessageTemplate:
+          EmailSubject: いらっしゃいませ
+          EmailMessage: !Join
+          - "<br>\n"
+          - - あなたの名前は {username}、仮パスワードは [ {####} ] です。
+            - http://localhost:8080/login からログインしてください
+          SMSMessage: あなたのユーザー名は {username}、仮パスワードは {####} です。
+      AutoVerifiedAttributes:
+        - email
+      UsernameAttributes:
+        - email
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: true
+          RequireUppercase: true
+
+  UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+        ClientName: User Pool Client Example
+        ExplicitAuthFlows:
+          - ADMIN_NO_SRP_AUTH
+        GenerateSecret: false
+        RefreshTokenValidity: 30
+        UserPoolId: !Ref UserPool
+
+Outputs:
+  UserPoolID:
+    Value: !Ref UserPool
+  UserPoolProviderName:
+    Value: !GetAtt UserPool.ProviderName
+  UserPoolProviderURL:
+    Value: !GetAtt UserPool.ProviderURL
+  UserPoolArn:
+    Value: !GetAtt UserPool.Arn
+
+  UserPoolClientID:
+    Value: !Ref UserPoolClient
