@@ -1,4 +1,4 @@
-# Cognitoを使ったログインページのサンプルコード
+# Cognitoを使ったログイン画面
 
 ## 準備
 - `cognito-idp:*` の権限がついているユーザーを用意する
@@ -12,11 +12,11 @@ Default output format [json]:
 ```
 
 ## CloudFormation
-- https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/cfn-reference-cognito.html
+- `cognito_user_pool.yml` を実行しておく
+- プログラム内のUserPoolID, ClientIDをそれぞれ置換する
 
 ## サーバー起動
 ```
 $ php -S localhost:8080
+$ open http://localhost:8080
 ```
-
-
