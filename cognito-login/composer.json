@@ -1,0 +1,6 @@
+{
+    "name": "masakurapa/php-aws-example/cognito-login",
+    "require": {
+        "aws/aws-sdk-php": "^3.89"
+    }
+}
